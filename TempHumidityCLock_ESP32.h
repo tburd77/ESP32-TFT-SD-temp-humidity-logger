@@ -18,7 +18,6 @@
   #define TFT_DC         32 //AO connect to pin 32  (not sure that this is really used)  try pin 25
 
   Adafruit_ST7735 tft = Adafruit_ST7735(TFT_CS, TFT_DC, TFT_RST);
-   // Adafruit_ST7735 tft = Adafruit_ST7735(TFT_CS, TFT_DC, TFT_MOSI, TFT_SCLK, TFT_RST);
 
 //Clock
     #include <WiFi.h>
@@ -51,10 +50,13 @@
     float prevHumidity = 0.0; 
     float prevTemp = 0.0;
     
-    int16_t  defaultTemp = 50;
+    int16_t  defaultTemp = 50;//on temp
+    int16_t  defaultHumidity = 50;//fan on humidity %
+    
     bool validRead_Temp = false;
     bool validRead_Humid = false;
     bool thermoStatus = false;
+    bool fanStatus = false;
     bool tempHumdFileCreated = false;
     
 // Buttons
@@ -84,7 +86,8 @@
     
 // Digital Outputs
 
-
+    #define heaterOn_Pin   2
+    #define fanOn_Pin      4
 
 // millis
   #include <elapsedMillis.h>
