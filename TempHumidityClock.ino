@@ -8,9 +8,9 @@ void setup(void) {
     setupTFT();
     setupWifi();
     setupClock();
-    setupDHT();
-  //  setupSPI();   
+    setupDHT();  
     setupButtons();
+    setupDigitalOutputs();
     
     drawThermoStatus();
 }
@@ -45,6 +45,7 @@ void loop() {
       { 
         checkTempHumidity();
         checkTemp_Timer = 0;
+        
         if (thermoStatus == true) {//true = on
            if (currentTemp >= defaultTemp + 3) {
               thermoStatus = false;
@@ -54,7 +55,18 @@ void loop() {
               thermoStatus = true;
            }
         }
+        
+        if (fanStatus == true) {//true = on
+           if (currentHumidity >= defaultHumidity + 3) {
+              fanStatus = false;
+           }
+        }else {
+          if (currentHumidity < defaultHumidity) {
+              fanStatus = true;
+           }
+        }
         saveTempHumid();
+        OnOff_TempHumid();
       }
 
       if (refreshDisplay_Timer > 10000) {
@@ -62,6 +74,7 @@ void loop() {
         drawThermoStatus();
       }
 
+    
     delay(1000);
 }
 
