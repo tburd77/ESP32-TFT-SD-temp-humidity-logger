@@ -2,8 +2,8 @@
 
 
 
-const char* ssid     = "Frontier1952";
-const char* password = "lynngene";
+const char* ssid     = "*********";
+const char* password = "*********";
 
 int btnGPIO = 0;
 int btnState = false;
